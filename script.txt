@@ -1,0 +1,15 @@
+CREATE DATABASE telefonia WITH ENCODING = 'UTF8'; 
+\c telefonia 
+
+/*TABLES*/
+
+CREATE TABLE smartphone(
+    id SERIAL PRIMARY KEY NOT NULL,
+    marca VARCHAR (20) NOT NULL,
+    sistema VARCHAR (20) NOT NULL,
+    tamanio FLOAT NOT NULL,
+    liberado BOOLEAN NOT NULL	
+);
+
+INSERT INTO smartphone(marca, sistema,tamanio, liberado) VALUES ('Samsung', 'Android', 10.02, FALSE);
+INSERT INTO smartphone(marca, sistema,tamanio, liberado) VALUES ('iPhone', 'iOS', 11.02, TRUE);
