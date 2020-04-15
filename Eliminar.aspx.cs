@@ -5,25 +5,24 @@ public partial class Default2 : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
 
-        Telefonia telefonia = new Telefonia();
+        Concesionaria concesionaria = new Concesionaria();
        
         var id = Request.QueryString["id"];
         if (id != null)
         {
 
-            SmartphoneBean smartphone= telefonia.obtenerIndice(Int32.Parse(id));
-            if (smartphone != null)
+            AutomovilBean automovil= concesionaria.obtenerIndice(Int32.Parse(id));
+            if (automovil != null)
             {
-                lbDelete.Text = smartphone.ToString();
-                if (telefonia.delete(Int32.Parse(id))) {
+                lbDelete.Text = automovil.ToString();
+                if (concesionaria.delete(Int32.Parse(id))) {
                     lbDelete.Text = "Eliminado..";
                     Response.Redirect("consultar.aspx");
                 }
                 else
                 {
-                    lbDelete.Text = telefonia.obtenerIndice(Int32.Parse(id)).ToString();
+                    lbDelete.Text = concesionaria.obtenerIndice(Int32.Parse(id)).ToString();
                 }
-            
             }
             else
             {

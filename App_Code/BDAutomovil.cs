@@ -2,48 +2,47 @@
 using System;
 using System.Collections.Generic;
 
-public class BDTelefonia
+public class BDAutomovil
 {
     private Persistencia connection;
 
-    private static BDTelefonia instancia;
+    private static BDAutomovil instancia;
 
-    private BDTelefonia()
+    private BDAutomovil()
     {
         connection = Persistencia.getInstancia();
     }
 
-    public static BDTelefonia getInstancia()
+    public static BDAutomovil getInstancia()
     {
         if (instancia == null)
-            instancia = new BDTelefonia();
+            instancia = new BDAutomovil();
         return instancia;
     }
 
 
-    public List<SmartphoneBean> load()
+    public List<AutomovilBean> load()
     {
-        List<SmartphoneBean> smartphones = new List<SmartphoneBean>();
+        List<AutomovilBean> automoviles = new List<AutomovilBean>();
 
         Persistencia connection = Persistencia.getInstancia();
-        NpgsqlDataReader dr = connection.getSqlCommand("SELECT id,marca,sistema,tamanio,liberado from smartphone").ExecuteReader();
+        NpgsqlDataReader dr = connection.getSqlCommand("SELECT id,nombre,marca,precio,asegurado from automovil").ExecuteReader();
         while (dr.Read())
         {
             Console.WriteLine("{0}\t{1}\t{2}\t{3}\t{4}", dr[0], dr[1], dr[2], dr[3], dr[4]);
-            double tamanioD = (Double)dr[3];
-            float tamanio = (float)tamanioD;
-
-            SmartphoneBean smartphone = new SmartphoneBean(Convert.ToInt32(dr[0]), Convert.ToString(dr[1]), Convert.ToString(dr[2]), tamanio, (bool)dr[4]);
-            smartphones.Add(smartphone);
+            double precioD = (Double)dr[3];
+            float precio = (float)precioD;
+            AutomovilBean smartphone = new AutomovilBean(Convert.ToInt32(dr[0]), Convert.ToString(dr[1]), Convert.ToString(dr[2]), precio, (bool)dr[4]);
+            automoviles.Add(smartphone);
         }
         dr.Close();
-        return smartphones;
+        return automoviles;
     }
 
     public bool delete(int id) {
         try
         {
-            NpgsqlCommand comAdd = connection.getSqlCommand("DELETE FROM smartphone WHERE id = @id");
+            NpgsqlCommand comAdd = connection.getSqlCommand("DELETE FROM automovil WHERE id = @id");
             comAdd.Parameters.AddWithValue("id", id);
             int columnasAfectadas = comAdd.ExecuteNonQuery();
             return (columnasAfectadas > 0);
@@ -55,16 +54,16 @@ public class BDTelefonia
         }
     }
 
-    public bool add(SmartphoneBean smartphone)
+    public bool add(AutomovilBean smartphone)
     {
         try
         {
-            NpgsqlCommand comAdd = connection.getSqlCommand("INSERT INTO smartphone (marca,sistema,tamanio,liberado) VALUES (@marca, @sistema, @tamanio, @liberado);");
+            NpgsqlCommand comAdd = connection.getSqlCommand("INSERT INTO automovil (nombre,marca,precio,asegurado) VALUES (@nombre, @marca, @precio, @asegurado);");
 
-            comAdd.Parameters.AddWithValue("marca", smartphone.Modelo);
-            comAdd.Parameters.AddWithValue("sistema", smartphone.Sistema);
-            comAdd.Parameters.AddWithValue("tamanio", smartphone.Tamanio);
-            comAdd.Parameters.AddWithValue("liberado", smartphone.Liberado);
+            comAdd.Parameters.AddWithValue("nombre", smartphone.Nombre);
+            comAdd.Parameters.AddWithValue("marca", smartphone.Marca);
+            comAdd.Parameters.AddWithValue("precio", smartphone.Precio);
+            comAdd.Parameters.AddWithValue("asegurado", smartphone.Asegurado);
             int columnasAfectadas = comAdd.ExecuteNonQuery();
             return (columnasAfectadas > 0);
         }
@@ -74,21 +73,20 @@ public class BDTelefonia
         }
     }
 
-    public bool save(List<SmartphoneBean> list)
+    public bool save(List<AutomovilBean> list)
     {
         try
         {
-            foreach (SmartphoneBean smartphone in list)
+            foreach (AutomovilBean smartphone in list)
             {
                 if (smartphone.Id == -1)
                 {
                     if (add(smartphone))
                         Console.WriteLine("Guardó sin problemas");
                     else
-                        Console.WriteLine("No guardo corre. jaja");
+                        Console.WriteLine("No guardo.");
                 }
             }
-
         }
         catch
         {

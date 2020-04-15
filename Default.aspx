@@ -3,8 +3,8 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
     <div class="jumbotron">
-        <h1>Telefonía</h1>
-        <p class="lead">Página para control de smartphones</p>
+        <h1>Venta de autos</h1>
+        <p class="lead">Página para venta de autos</p>
     </div>
 
     <div class="row">
@@ -13,25 +13,22 @@
             <p>
                 Práctica W3 – DB Web
             </p>
+        </div>
+        <div class="col-md-4">
+            <h2>Agregar automoviles</h2>
             <p>
-                Persistencía en BD postgresql usando ASP.NET
+                Página para agregar automoviles al sistema.
+            <p>
+                <a class="btn btn-default" href="Agregar.aspx">Agregar automoviles</a>
             </p>
         </div>
         <div class="col-md-4">
-            <h2>Agregar smartphones</h2>
+            <h2>Consultar automoviles</h2>
             <p>
-                Página para agregar smartphones al sistema.
-            <p>
-                <a class="btn btn-default" href="Agregar.aspx">Agregar smartphones</a>
-            </p>
-        </div>
-        <div class="col-md-4">
-            <h2>Consultar smartphones</h2>
-            <p>
-               Página para consultar los smartphones al sitema.
+               Página para consultar los automoviles al sitema.
             </p>
             <p>
-                <a class="btn btn-default" href="Consultar.aspx">Consultar smartphones</a>
+                <a class="btn btn-default" href="Consultar.aspx">Consultar automoviles</a>
             </p>
         </div>
     </div>

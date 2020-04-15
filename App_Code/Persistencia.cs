@@ -7,9 +7,15 @@ using System;
 public class Persistencia
 {
 
+    private static string host = "127.0.0.1";
+    private static string user = "postgres";
+    private static string password = "123456789";
+    private static string db = "automoviles";
+
+
     private static Persistencia instancia;
 
-    private static string connString = "Host=127.0.0.1;User ID=postgres;Password=123456789;Database=telefonia;";
+    private static string connString = "Host="+host+";User ID="+user+";Password="+password+";Database="+db+";";
 
     private static NpgsqlConnection connection;
 
